@@ -1,0 +1,2338 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Клетка и её органоиды — Ева, 6 класс</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(87,117,255,.20), transparent 25%),
+        radial-gradient(circle at 80% 70%, rgba(0,220,255,.13), transparent 25%),
+        #061329;
+    color:white;
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
+/* ===== ФОН ===== */
+
+.background{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:0;
+}
+
+.particle{
+    position:absolute;
+    width:5px;
+    height:5px;
+    background:#62d9ff;
+    border-radius:50%;
+    opacity:.6;
+    animation:float 8s infinite ease-in-out;
+}
+
+.p1{left:8%;top:20%;animation-delay:0s}
+.p2{left:18%;top:70%;animation-delay:2s}
+.p3{left:32%;top:35%;animation-delay:4s}
+.p4{left:48%;top:80%;animation-delay:1s}
+.p5{left:63%;top:18%;animation-delay:3s}
+.p6{left:75%;top:55%;animation-delay:5s}
+.p7{left:88%;top:30%;animation-delay:1s}
+.p8{left:92%;top:82%;animation-delay:4s}
+
+@keyframes float{
+    0%,100%{transform:translateY(0) scale(1)}
+    50%{transform:translateY(-35px) scale(1.5)}
+}
+
+/* ===== HEADER ===== */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    padding:14px 25px;
+    background:rgba(3,14,35,.88);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(90,210,255,.25);
+}
+
+.header-inner{
+    max-width:1250px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo-icon{
+    width:48px;
+    height:48px;
+    border-radius:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#6d5cff,#00cfff);
+    font-size:27px;
+    box-shadow:0 0 25px rgba(0,207,255,.4);
+}
+
+.logo h1{
+    font-size:20px;
+}
+
+.logo p{
+    color:#8bdfff;
+    font-size:13px;
+    margin-top:3px;
+}
+
+.student{
+    text-align:right;
+}
+
+.student strong{
+    display:block;
+    color:#fff;
+}
+
+.student span{
+    color:#82dfff;
+    font-size:13px;
+}
+
+/* ===== MAIN ===== */
+
+main{
+    position:relative;
+    z-index:2;
+    max-width:1250px;
+    margin:auto;
+    padding:35px 20px 100px;
+}
+
+/* ===== HERO ===== */
+
+.hero{
+    min-height:300px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    align-items:center;
+    gap:30px;
+    margin-bottom:35px;
+}
+
+.hero h2{
+    font-size:48px;
+    line-height:1.05;
+    background:linear-gradient(90deg,#fff,#70e7ff,#a68cff);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    margin-top:18px;
+    font-size:18px;
+    color:#bdd9ed;
+    line-height:1.6;
+}
+
+.badges{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
+.badge{
+    padding:9px 14px;
+    border-radius:30px;
+    background:rgba(70,130,255,.14);
+    border:1px solid rgba(80,210,255,.3);
+    color:#b8ecff;
+}
+
+/* ===== CELL HERO IMAGE ===== */
+
+.cell-art{
+    min-height:300px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+}
+
+.cell{
+    width:270px;
+    height:220px;
+    position:relative;
+    border-radius:48% 52% 45% 55%;
+    background:
+        radial-gradient(circle at 30% 30%,#87e9ff 0 5%,transparent 6%),
+        radial-gradient(circle at 70% 70%,#4a78ff 0 7%,transparent 8%),
+        radial-gradient(circle at 40% 70%,#704fff 0 5%,transparent 6%),
+        linear-gradient(135deg,#4ccfff,#5b5af4,#9b57e9);
+    border:5px solid #a9f4ff;
+    box-shadow:
+        0 0 25px #39dfff,
+        0 0 70px rgba(80,100,255,.45),
+        inset 0 0 35px rgba(255,255,255,.25);
+    animation:cellFloat 4s infinite ease-in-out;
+}
+
+@keyframes cellFloat{
+    0%,100%{transform:translateY(0) rotate(-2deg)}
+    50%{transform:translateY(-12px) rotate(2deg)}
+}
+
+.nucleus{
+    position:absolute;
+    width:85px;
+    height:85px;
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 30%,#ffb6ff,#8a35dc 55%,#401c8d);
+    border:3px solid #e3b9ff;
+    box-shadow:0 0 25px #b14cff;
+    left:92px;
+    top:67px;
+}
+
+.nucleolus{
+    width:22px;
+    height:22px;
+    border-radius:50%;
+    background:#f6b6ff;
+    position:absolute;
+    left:30px;
+    top:30px;
+    box-shadow:0 0 15px #ff86ff;
+}
+
+.mito{
+    position:absolute;
+    width:50px;
+    height:25px;
+    border-radius:50%;
+    background:#ff765f;
+    border:2px solid #ffd17a;
+    box-shadow:0 0 15px #ff744c;
+}
+
+.mito:after{
+    content:"〰";
+    color:#ffe49a;
+    position:absolute;
+    left:10px;
+    top:-3px;
+    font-size:25px;
+}
+
+.m1{left:28px;top:55px;transform:rotate(-25deg)}
+.m2{right:25px;top:42px;transform:rotate(20deg)}
+.m3{right:40px;bottom:35px;transform:rotate(-20deg)}
+
+.vacuole{
+    position:absolute;
+    width:52px;
+    height:65px;
+    border-radius:40%;
+    background:rgba(120,235,255,.45);
+    border:2px solid #a7f8ff;
+    left:38px;
+    bottom:32px;
+}
+
+.golgi{
+    position:absolute;
+    right:70px;
+    bottom:62px;
+}
+
+.golgi i{
+    display:block;
+    width:52px;
+    height:8px;
+    background:#ff72c7;
+    border-radius:50%;
+    margin:4px;
+    box-shadow:0 0 10px #ff65ca;
+}
+
+/* ===== NAVIGATION ===== */
+
+.navigation{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:15px;
+    margin:15px 0 30px;
+}
+
+.nav-btn{
+    border:none;
+    cursor:pointer;
+    padding:12px 20px;
+    border-radius:30px;
+    color:white;
+    background:linear-gradient(135deg,#5156e8,#008ed0);
+    font-size:15px;
+    box-shadow:0 7px 25px rgba(0,150,255,.25);
+    transition:.25s;
+}
+
+.nav-btn:hover{
+    transform:translateY(-3px) scale(1.03);
+    box-shadow:0 10px 30px rgba(0,220,255,.35);
+}
+
+.counter{
+    padding:10px 17px;
+    border-radius:25px;
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.15);
+}
+
+.progress{
+    width:100%;
+    height:6px;
+    border-radius:10px;
+    background:rgba(255,255,255,.08);
+    margin-bottom:25px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:100%;
+    width:4%;
+    background:linear-gradient(90deg,#00d9ff,#8d62ff);
+    transition:.4s;
+}
+
+/* ===== SLIDES ===== */
+
+.slide{
+    display:none;
+    animation:slideIn .5s ease;
+}
+
+.slide.active{
+    display:block;
+}
+
+@keyframes slideIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.slide-card{
+    background:rgba(10,28,58,.82);
+    border:1px solid rgba(80,215,255,.25);
+    border-radius:28px;
+    padding:32px;
+    box-shadow:0 20px 70px rgba(0,0,0,.25);
+    backdrop-filter:blur(15px);
+}
+
+.slide-title{
+    font-size:32px;
+    margin-bottom:12px;
+    color:#9ceeff;
+}
+
+.slide-subtitle{
+    color:#bdd4e9;
+    line-height:1.6;
+    font-size:17px;
+}
+
+.definition{
+    margin-top:22px;
+    padding:20px;
+    border-radius:18px;
+    background:linear-gradient(135deg,rgba(0,192,255,.12),rgba(120,80,255,.12));
+    border-left:4px solid #39dcff;
+}
+
+.definition strong{
+    color:#7feaff;
+}
+
+.content-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+    margin-top:25px;
+}
+
+.info-card{
+    padding:20px;
+    border-radius:20px;
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.09);
+    transition:.3s;
+}
+
+.info-card:hover{
+    transform:translateY(-6px);
+    border-color:#54ddff;
+    box-shadow:0 15px 35px rgba(0,200,255,.12);
+}
+
+.info-card h3{
+    color:#b3efff;
+    margin-bottom:10px;
+}
+
+.info-card p,
+.info-card li{
+    color:#d3e2ef;
+    line-height:1.6;
+}
+
+ul{
+    padding-left:20px;
+}
+
+/* ===== ORGANELLE CARDS ===== */
+
+.organelles{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-top:25px;
+}
+
+.organelle{
+    min-height:145px;
+    padding:18px;
+    border-radius:22px;
+    background:rgba(16,42,80,.8);
+    border:1px solid rgba(100,210,255,.18);
+    cursor:pointer;
+    position:relative;
+    overflow:hidden;
+    transition:.35s;
+}
+
+.organelle:before{
+    content:"";
+    position:absolute;
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    background:rgba(0,220,255,.08);
+    right:-40px;
+    top:-40px;
+}
+
+.organelle:hover{
+    transform:translateY(-8px) scale(1.02);
+    border-color:#55e2ff;
+    box-shadow:0 15px 35px rgba(0,200,255,.2);
+}
+
+.org-icon{
+    font-size:35px;
+    margin-bottom:10px;
+}
+
+.organelle h3{
+    font-size:17px;
+    color:#fff;
+}
+
+.organelle p{
+    color:#9fc0d7;
+    font-size:13px;
+    margin-top:5px;
+}
+
+/* ===== CELL DIAGRAM ===== */
+
+.diagram-section{
+    margin-top:28px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+}
+
+.diagram{
+    min-height:420px;
+    border-radius:25px;
+    background:rgba(2,15,35,.65);
+    border:1px solid rgba(70,220,255,.2);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    overflow:hidden;
+}
+
+.big-cell{
+    width:300px;
+    height:245px;
+    border-radius:50%;
+    background:
+        radial-gradient(circle at 30% 25%,#4cdaff 0 4%,transparent 5%),
+        radial-gradient(circle at 75% 30%,#ff7fca 0 5%,transparent 6%),
+        radial-gradient(circle at 30% 75%,#74ffb2 0 5%,transparent 6%),
+        linear-gradient(135deg,#2c9fe8,#5b4dd6,#9d4cd4);
+    border:5px solid #a7edff;
+    box-shadow:0 0 50px rgba(52,215,255,.35);
+    position:relative;
+}
+
+.big-nucleus{
+    position:absolute;
+    width:95px;
+    height:95px;
+    background:radial-gradient(circle,#e6a4ff,#7336bd);
+    border-radius:50%;
+    left:103px;
+    top:75px;
+    border:3px solid #f1c4ff;
+    box-shadow:0 0 30px #ae5aff;
+}
+
+.diagram-org{
+    position:absolute;
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:11px;
+    background:rgba(4,20,45,.85);
+    border:1px solid #62ddff;
+    color:#c9f7ff;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.diagram-org:hover{
+    background:#14678a;
+    transform:scale(1.12);
+}
+
+.d1{top:25px;left:30px}
+.d2{top:40px;right:20px}
+.d3{bottom:35px;left:35px}
+.d4{bottom:25px;right:35px}
+.d5{top:150px;left:5px}
+.d6{top:145px;right:0}
+
+/* ===== PLANT CELL ===== */
+
+.plant-cell{
+    width:320px;
+    height:230px;
+    background:linear-gradient(135deg,#5cc95b,#94dc55,#54b96c);
+    border:12px solid #2e8e42;
+    border-radius:25px;
+    position:relative;
+    box-shadow:0 0 45px rgba(80,255,100,.2);
+}
+
+.plant-vacuole{
+    position:absolute;
+    width:145px;
+    height:115px;
+    background:rgba(125,220,255,.6);
+    border:3px solid #b4f8ff;
+    border-radius:45%;
+    left:80px;
+    top:55px;
+}
+
+.chloroplast{
+    position:absolute;
+    width:45px;
+    height:22px;
+    border-radius:50%;
+    background:#159b46;
+    border:2px solid #b0ff83;
+}
+
+.ch1{left:30px;top:45px}
+.ch2{right:35px;top:65px}
+.ch3{left:45px;bottom:35px}
+.ch4{right:30px;bottom:30px}
+
+.plant-nucleus{
+    position:absolute;
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    background:#a958dc;
+    border:3px solid #e7b5ff;
+    right:80px;
+    top:35px;
+}
+
+/* ===== POPUP ===== */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,5,18,.75);
+    backdrop-filter:blur(10px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:500;
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+    animation:fade .25s ease;
+}
+
+@keyframes fade{
+    from{opacity:0}
+    to{opacity:1}
+}
+
+.modal-box{
+    width:min(600px,100%);
+    background:linear-gradient(145deg,#0b2349,#10113c);
+    border:1px solid #50ddff;
+    border-radius:30px;
+    padding:30px;
+    box-shadow:0 0 80px rgba(0,210,255,.25);
+    animation:pop .35s ease;
+    position:relative;
+}
+
+@keyframes pop{
+    from{transform:scale(.8);opacity:0}
+    to{transform:scale(1);opacity:1}
+}
+
+.close{
+    position:absolute;
+    right:18px;
+    top:15px;
+    width:35px;
+    height:35px;
+    border:none;
+    border-radius:50%;
+    background:rgba(255,255,255,.1);
+    color:white;
+    cursor:pointer;
+    font-size:20px;
+}
+
+.modal-icon{
+    font-size:55px;
+}
+
+.modal-box h2{
+    color:#9ceeff;
+    margin:10px 0;
+}
+
+.modal-box p{
+    color:#d1e5f1;
+    line-height:1.7;
+}
+
+.modal-tip{
+    margin-top:18px;
+    padding:15px;
+    border-radius:15px;
+    background:rgba(0,220,255,.08);
+    border:1px solid rgba(0,220,255,.2);
+    color:#bcefff;
+}
+
+/* ===== FORMULA ===== */
+
+.formula{
+    margin:20px 0;
+    padding:18px;
+    border-radius:18px;
+    text-align:center;
+    font-size:21px;
+    color:#fff;
+    background:linear-gradient(90deg,rgba(0,190,255,.12),rgba(145,75,255,.15));
+    border:1px solid rgba(100,220,255,.25);
+}
+
+/* ===== QUIZ ===== */
+
+.question{
+    padding:18px;
+    margin:12px 0;
+    background:rgba(255,255,255,.045);
+    border-radius:15px;
+}
+
+.answer{
+    display:none;
+    margin-top:10px;
+    color:#85ffb7;
+}
+
+.show-answer{
+    margin-top:10px;
+    padding:7px 13px;
+    border:none;
+    border-radius:15px;
+    background:#23557a;
+    color:white;
+    cursor:pointer;
+}
+
+/* ===== FOOTER ===== */
+
+footer{
+    text-align:center;
+    margin-top:45px;
+    padding:25px;
+    color:#7896ac;
+    border-top:1px solid rgba(255,255,255,.08);
+}
+
+.footer-title{
+    color:#9cecff;
+    font-size:18px;
+    margin-bottom:5px;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media(max-width:900px){
+    .hero{
+        grid-template-columns:1fr;
+        text-align:center;
+    }
+
+    .badges{
+        justify-content:center;
+    }
+
+    .content-grid,
+    .diagram-section{
+        grid-template-columns:1fr;
+    }
+
+    .organelles{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .header-inner{
+        flex-direction:column;
+    }
+
+    .student{
+        text-align:center;
+    }
+}
+
+@media(max-width:600px){
+    .hero h2{
+        font-size:35px;
+    }
+
+    .slide-card{
+        padding:20px;
+    }
+
+    .slide-title{
+        font-size:25px;
+    }
+
+    .organelles{
+        grid-template-columns:1fr;
+    }
+
+    .cell{
+        width:230px;
+        height:190px;
+    }
+
+    .nucleus{
+        width:70px;
+        height:70px;
+        left:80px;
+        top:58px;
+    }
+
+    .nucleolus{
+        left:24px;
+        top:24px;
+    }
+
+    .navigation{
+        flex-wrap:wrap;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background">
+    <span class="particle p1"></span>
+    <span class="particle p2"></span>
+    <span class="particle p3"></span>
+    <span class="particle p4"></span>
+    <span class="particle p5"></span>
+    <span class="particle p6"></span>
+    <span class="particle p7"></span>
+    <span class="particle p8"></span>
+</div>
+
+<header>
+<div class="header-inner">
+
+    <div class="logo">
+        <div class="logo-icon">🧬</div>
+        <div>
+            <h1>Клетка и её органоиды</h1>
+            <p>Биология • 6 класс</p>
+        </div>
+    </div>
+
+    <div class="student">
+        <strong>Препод Джураев Муслим Тариэльевич</strong>
+        <span>Ученица: Ева • 6 класс</span>
+    </div>
+
+</div>
+</header>
+
+<main>
+
+<section class="hero">
+
+    <div>
+        <h2>Клетка — маленькая,<br>но очень важная!</h2>
+
+        <p>
+            Интерактивная презентация о строении клетки,
+            её органоидах и удивительных процессах,
+            которые происходят внутри живого организма.
+        </p>
+
+        <div class="badges">
+            <div class="badge">🔬 Биология</div>
+            <div class="badge">🧬 Клетка</div>
+            <div class="badge">🌱 6 класс</div>
+            <div class="badge">👩‍🎓 Ева</div>
+        </div>
+    </div>
+
+    <div class="cell-art">
+
+        <div class="cell">
+
+            <div class="nucleus">
+                <div class="nucleolus"></div>
+            </div>
+
+            <div class="mito m1"></div>
+            <div class="mito m2"></div>
+            <div class="mito m3"></div>
+
+            <div class="vacuole"></div>
+
+            <div class="golgi">
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<div class="progress">
+    <div class="progress-bar" id="progressBar"></div>
+</div>
+
+<div class="navigation">
+    <button class="nav-btn" onclick="previousSlide()">← Назад</button>
+    <div class="counter" id="counter">1 / 24</div>
+    <button class="nav-btn" onclick="nextSlide()">Вперёд →</button>
+</div>
+
+
+<!-- ================================================= -->
+<!-- СЛАЙД 1 -->
+<!-- ================================================= -->
+
+<section class="slide active">
+
+<div class="slide-card">
+
+<h2 class="slide-title">1. Клетка — основа жизни 🔬</h2>
+
+<p class="slide-subtitle">
+Клетка — это самая маленькая живая часть организма,
+которая может выполнять основные жизненные процессы.
+</p>
+
+<div class="definition">
+<strong>Что такое клетка?</strong><br><br>
+Клетка — это маленькая структурная и функциональная единица
+живого организма. Все растения, животные, грибы и бактерии
+состоят из клеток.
+</div>
+
+<div class="content-grid">
+
+<div class="info-card">
+<h3>🌱 Растения</h3>
+<p>Имеют клетки с клеточной стенкой и хлоропластами.</p>
+</div>
+
+<div class="info-card">
+<h3>🐾 Животные</h3>
+<p>Имеют клеточную мембрану, ядро и другие органоиды.</p>
+</div>
+
+<div class="info-card">
+<h3>🦠 Бактерии</h3>
+<p>Обычно являются одноклеточными организмами.</p>
+</div>
+
+<div class="info-card">
+<h3>💡 Главное</h3>
+<p>Клетку можно представить как маленькую фабрику,
+где каждая часть выполняет свою работу.</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ================================================= -->
+<!-- СЛАЙД 2 -->
+<!-- ================================================= -->
+
+<section class="slide">
+
+<div class="slide-card">
+
+<h2 class="slide-title">2. Какие бывают клетки? 🧬</h2>
+
+<p class="slide-subtitle">
+Клетки могут сильно отличаться друг от друга по форме,
+размеру и выполняемой работе.
+</p>
+
+<div class="content-grid">
+
+<div class="info-card">
+<h3>🧠 Нервная клетка</h3>
+<p>Имеет длинные отростки и передаёт сигналы.</p>
+</div>
+
+<div class="info-card">
+<h3>💪 Мышечная клетка</h3>
+<p>Помогает организму двигаться и сокращаться.</p>
+</div>
+
+<div class="info-card">
+<h3>🌿 Клетка растения</h3>
+<p>Имеет хлоропласты и клеточную стенку.</p>
+</div>
+
+<div class="info-card">
+<h3>🩸 Клетка крови</h3>
+<p>Красные кровяные клетки переносят кислород.</p>
+</div>
+
+</div>
+
+<div class="definition">
+💡 Несмотря на различия, у многих клеток есть общие части:
+<strong>мембрана, цитоплазма, ядро и органоиды.</strong>
+</div>
+
+</div>
+</section>
+
+
+<!-- ================================================= -->
+<!-- СЛАЙД 3 -->
+<!-- ================================================= -->
+
+<section class="slide">
+
+<div class="slide-card">
+
+<h2 class="slide-title">3. Клеточная мембрана 🛡️</h2>
+
+<p class="slide-subtitle">
+Мембрана окружает клетку и отделяет её от окружающей среды.
+</p>
+
+<div class="definition">
+<strong>Что такое мембрана?</strong><br><br>
+Клеточная мембрана — это тонкая оболочка,
+которая защищает клетку и контролирует,
+какие вещества входят в неё и выходят из неё.
+</div>
+
+<div class="content-grid">
+
+<div class="info-card">
+<h3>🛡️ Защита</h3>
+<p>Отделяет внутреннюю часть клетки от внешней среды.</p>
+</div>
+
+<div class="info-card">
+<h3>🚪 Контроль</h3>
+<p>Пропускает одни вещества и задерживает другие.</p>
+</div>
+
+<div class="info-card">
+<h3>🔄 Обмен</h3>
+<p>Помогает клетке получать необходимые вещества.</p>
+</div>
+
+<div class="info-card">
+<h3>📡 Связь</h3>
+<p>Помогает клетке взаимодействовать с окружающей средой.</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ================================================= -->
+<!-- СЛАЙД 4 -->
+<!-- ================================================= -->
+
+<section class="slide">
+
+<div class="slide-card">
+
+<h2 class="slide-title">4. Цитоплазма 💧</h2>
+
+<div class="definition">
+<strong>Цитоплазма</strong> — это внутреннее содержимое клетки,
+в котором находятся органоиды и происходят химические реакции.
+</div>
+
+<div class="content-grid">
+
+<div class="info-card">
+<h3>🧪 Химические реакции</h3>
+<p>В цитоплазме происходит множество процессов,
+необходимых клетке.</p>
+</div>
+
+<div class="info-card">
+<h3>🚚 Перемещение</h3>
+<p>Вещества могут перемещаться внутри клетки.</p>
+</div>
+
+<div class="info-card">
+<h3>🔬 Органоиды</h3>
+<p>Большинство органоидов расположено именно в цитоплазме.</p>
+</div>
+
+<div class="info-card">
+<h3>💡 Простая аналогия</h3>
+<p>Цитоплазма похожа на внутреннее пространство фабрики.</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ================================================= -->
+<!-- СЛАЙД 5 -->
+<!-- ================================================= -->
+
+<section class="slide">
+
+<div class="slide-card">
+
+<h2 class="slide-title">5. Ядро — центр управления 🧠</h2>
+
+<div class="definition">
+<strong>Ядро</strong> — органоид клетки, в котором находится
+большая часть наследственной информации.
+</div>
+
+<div class="content-grid">
+
+<div class="info-card">
+<h3>🧬 ДНК</h3>
+<p>В ядре находится ДНК — молекула с наследственной информацией.</p>
+</div>
+
+<div class="info-card">
+<h3>⚙️ Управление</h3>
+<p>Ядро регулирует работу клетки.</p>
+</div>
+
+<div class="info-card">
+<h3>👨‍👩‍👧 Наследственность</h3>
+<p>Информация ДНК передаётся от родителей потомкам.</p>
+</div>
+
+<div class="info-card">
+<h3>🔬 Деление</h3>
+<p>Ядро играет важную роль при делении клетки.</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ================================================= -->
+<!-- СЛАЙД 6 -->
+<!-- ================================================= -->
+
+<section class="slide">
+
+<div class="slide-card">
+
+<h2 class="slide-title">6. ДНК 🧬</h2>
+
+<div class="definition">
+<strong>ДНК</strong> — дезоксирибонуклеиновая кислота.
+Это молекула, в которой хранится наследственная информация.
+</div>
+
+<div class="diagram-section">
+
+<div class="info-card">
+<h3>Что хранит ДНК?</h3>
+<ul>
+<li>Информацию о строении организма.</li>
+<li>Инструкции для работы клеток.</li>
+<li>Наследственные признаки.</li>
+</ul>
+</div>
+
+<div class="info-card">
+<h3>Почему ДНК важна?</h3>
+<p>
+Благодаря ДНК клетки знают,
+какие белки необходимо создавать
+и как правильно работать.
+</p>
+</div>
+
+</div>
+
+<div class="formula">
+🧬 ДНК → наследственная информация → признаки организма
+</div>
+
+</div>
+</section>
+
+
+<!-- ================================================= -->
+<!-- СЛАЙД 7 -->
+<!-- ================================================= -->
+
+<section class="slide">
+
+<div class="slide-card">
+
+<h2 class="slide-title">7. Митохондрии ⚡</h2>
+
+<div class="definition">
+<strong>Митохондрии</strong> — органоиды, в которых клетка
+получает значительную часть энергии.
+</div>
+
+<div class="content-grid">
+
+<div class="info-card">
+<h3>⚡ Энергия</h3>
+<p>Митохондрии производят энергию, необходимую клетке.</p>
+</div>
+
+<div class="info-card">
+<h3>🍎 Питательные вещества</h3>
+<p>Клетка использует вещества пищи для получения энергии.</p>
+</div>
+
+<div class="info-card">
+<h3>🫁 Кислород</h3>
+<p>При клеточном дыхании используется кислород.</p>
+</div>
+
+<div class="info-card">
+<h3>🏭 Аналогия</h3>
+<p>Митохондрии можно представить как энергетические станции клетки.</p>
+</div>
+
+</div>
+
+<div class="formula">
+Питательные вещества + O₂ → CO₂ + H₂O + энергия
+</div>
+
+</div>
+</section>
+
+
+<!-- ================================================= -->
+<!-- СЛАЙД 8 -->
+<!-- ================================================= -->
+
+<section class="slide">
+
+<div class="slide-card">
+
+<h2 class="slide-title">8. АТФ — энергия клетки ⚡</h2>
+
+<div class="definition">
+<strong>АТФ</strong> — аденозинтрифосфат.
+Это молекула, которая переносит энергию внутри клетки.
+</div>
+
+<div class="content-grid">
+
+<div class="info-card">
+<h3>🏃 Движение</h3>
+<p>Энергия АТФ необходима для движения клеток и тканей.</p>
+</div>
+
+<div class="info-card">
+<h3>🧪 Синтез</h3>
+<p>АТФ используется при создании новых веществ.</p>
+</div>
+
+<div class="info-card">
+<h3>🚚 Транспорт</h3>
+<p>Энергия нужна для перемещения некоторых веществ через мембрану.</p>
+</div>
+
+<div class="info-card">
+<h3>🔋 Аналогия</h3>
+<p>АТФ можно сравнить с маленькой батарейкой клетки.</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ================================================= -->
+<!-- СЛАЙД 9 -->
+<!-- ================================================= -->
+
+<section class="slide">
+
+<div class="slide-card">
+
+<h2 class="slide-title">9. Рибосомы 🏭</h2>
+
+<div class="definition">
+<strong>Рибосомы</strong> — маленькие структуры,
+которые создают белки.
+</div>
+
+<div class="content-grid">
+
+<div class="info-card">
+<h3>🥩 Белки</h3>
+<p>Белки необходимы для роста и работы организма.</p>
+</div>
+
+<div class="info-card">
+<h3>🏭 Фабрика</h3>
+<p>Рибосомы можно представить как фабрики по производству белков.</p>
+</div>
+
+<div class="info-card">
+<h3>💪 Мышцы</h3>
+<p>Белки участвуют в работе мышечной ткани.</p>
+</div>
+
+<div class="info-card">
+<h3>🧬 Ферменты</h3>
+<p>Многие ферменты организма являются белками.</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ================================================= -->
+<!-- СЛАЙД 10 -->
+<!-- ================================================= -->
+
+<section class="slide">
+
+<div class="slide-card">
+
+<h2 class="slide-title">10. Эндоплазматическая сеть — ЭПС 🚚</h2>
+
+<div class="definition">
+<strong>ЭПС</strong> — система каналов внутри клетки,
+которая помогает создавать и перемещать вещества.
+</div>
+
+<div class="content-grid">
+
+<div class="info-card">
+<h3>📦 Транспорт</h3>
+<p>Помогает перемещать вещества внутри клетки.</p>
+</div>
+
+<div class="info-card">
+<h3>🔵 Шероховатая ЭПС</h3>
+<p>Имеет рибосомы и участвует в создании белков.</p>
+</div>
+
+<div class="info-card">
+<h3>🟣 Гладкая ЭПС</h3>
+<p>Участвует в создании некоторых липидов и других веществ.</p>
+</div>
+
+<div class="info-card">
+<h3>🚛 Аналогия</h3>
+<p>ЭПС похожа на систему дорог и коридоров внутри клетки.</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ================================================= -->
+<!-- СЛАЙД 11 -->
+<!-- ================================================= -->
+
+<section class="slide">
+
+<div class="slide-card">
+
+<h2 class="slide-title">11. Аппарат Гольджи 📦</h2>
+
+<div class="definition">
+<strong>Аппарат Гольджи</strong> — органоид,
+который изменяет, сортирует и упаковывает вещества.
+</div>
+
+<div class="formula">
+Вещество → Аппарат Гольджи → упаковка → нужное место
+</div>
+
+<div class="content-grid">
+
+<div class="info-card">
+<h3>📦 Упаковка</h3>
+<p>Вещества помещаются в специальные пузырьки.</p>
+</div>
+
+<div class="info-card">
+<h3>📮 Сортировка</h3>
+<p>Определяется, куда необходимо отправить вещество.</p>
+</div>
+
+<div class="info-card">
+<h3>🚚 Доставка</h3>
+<p>Помогает отправлять вещества в разные части клетки.</p>
+</div>
+
+<div class="info-card">
+<h3>📮 Аналогия</h3>
+<p>Аппарат Гольджи похож на почтовый центр.</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ================================================= -->
+<!-- СЛАЙД 12 -->
+<!-- ================================================= -->
+
+<section class="slide">
+
+<div class="slide-card">
+
+<h2 class="slide-title">12. Лизосомы ♻️</h2>
+
+<div class="definition">
+<strong>Лизосомы</strong> — небольшие органоиды,
+содержащие ферменты, которые помогают расщеплять
+ненужные вещества и части клеточных структур.
+</div>
+
+<div class="content-grid">
+
+<div class="info-card">
+<h3>♻️ Переработка</h3>
+<p>Расщепляют ненужные компоненты.</p>
+</div>
+
+<div class="info-card">
+<h3>🧹 Очистка</h3>
+<p>Помогают поддерживать порядок внутри клетки.</p>
+</div>
+
+<div class="info-card">
+<h3>🧪 Ферменты</h3>
+<p>Внутри лизосом находятся специальные ферменты.</p>
+</div>
+
+<div class="info-card">
+<h3>♻️ Аналогия</h3>
+<p>Лизосомы можно представить как перерабатывающий центр.</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ================================================= -->
+<!-- СЛАЙД 13 -->
+<!-- ================================================= -->
+
+<section class="slide">
+
+<div class="slide-card">
+
+<h2 class="slide-title">13. Вакуоль 💧</h2>
+
+<div class="definition">
+<strong>Вакуоль</strong> — полость внутри клетки,
+которая может хранить воду, растворённые вещества и другие соединения.
+</div>
+
+<div class="content-grid">
+
+<div class="info-card">
+<h3>💧 Вода</h3>
+<p>В растительной клетке крупная вакуоль может хранить много воды.</p>
+</div>
+
+<div class="info-card">
+<h3>📦 Запас</h3>
+<p>Может хранить различные растворённые вещества.</p>
+</div>
+
+<div class="info-card">
+<h3>🌱 Растения</h3>
+<p>У растительных клеток часто имеется большая центральная вакуоль.</p>
+</div>
+
+<div class="info-card">
+<h3>🎈 Аналогия</h3>
+<p>Вакуоль можно представить как резервуар.</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ================================================= -->
+<!-- СЛАЙД 14 -->
+<!-- ================================================= -->
+
+<section class="slide">
+
+<div class="slide-card">
+
+<h2 class="slide-title">14. Хлоропласты 🌿</h2>
+
+<div class="definition">
+<strong>Хлоропласты</strong> — органоиды растительных клеток,
+в которых происходит фотосинтез.
+</div>
+
+<div class="content-grid">
+
+<div class="info-card">
+<h3>🌿 Хлорофилл</h3>
+<p>В хлоропластах находится зелёный пигмент хлорофилл.</p>
+</div>
+
+<div class="info-card">
+<h3>☀️ Свет</h3>
+<p>Для фотосинтеза необходим свет.</p>
+</div>
+
+<div class="info-card">
+<h3>🍃 Растения</h3>
+<p>Хлоропласты характерны для растений и водорослей.</p>
+</div>
+
+<div class="info-card">
+<h3>🍬 Глюкоза</h3>
+<p>В результате фотосинтеза растение создаёт органическое вещество.</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ================================================= -->
+<!-- СЛАЙД 15 -->
+<!-- ================================================= -->
+
+<section class="slide">
+
+<div class="slide-card">
+
+<h2 class="slide-title">15. Фотосинтез ☀️🌱</h2>
+
+<div class="definition">
+<strong>Фотосинтез</strong> — процесс, при котором растения
+с помощью света создают органические вещества из воды и углекислого газа.
+</div>
+
+<div class="formula">
+6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂
+</div>
+
+<div class="content-grid">
+
+<div class="info-card">
+<h3>☀️ Свет</h3>
+<p>Энергия света необходима для процесса.</p>
+</div>
+
+<div class="info-card">
+<h3>💧 Вода</h3>
+<p>Растение получает воду преимущественно через корни.</p>
+</div>
+
+<div class="info-card">
+<h3>🌫️ CO₂</h3>
+<p>Углекислый газ поступает из воздуха.</p>
+</div>
+
+<div class="info-card">
+<h3>🫧 Кислород</h3>
+<p>Кислород выделяется в окружающую среду.</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ================================================= -->
+<!-- СЛАЙД 16 -->
+<!-- ================================================= -->
+
+<section class="slide">
+
+<div class="slide-card">
+
+<h2 class="slide-title">16. Клеточная стенка 🧱</h2>
+
+<div class="definition">
+<strong>Клеточная стенка</strong> — прочная оболочка,
+расположенная снаружи клеточной мембраны у растений.
+</div>
+
+<div class="content-grid">
+
+<div class="info-card">
+<h3>🛡️ Защита</h3>
+<p>Защищает растительную клетку.</p>
+</div>
+
+<div class="info-card">
+<h3>🏗️ Форма</h3>
+<p>Помогает клетке сохранять форму.</p>
+</div>
+
+<div class="info-card">
+<h3>🌱 Растения</h3>
+<p>Содержит большое количество целлюлозы.</p>
+</div>
+
+<div class="info-card">
+<h3>🧱 Аналогия</h3>
+<p>Можно сравнить с прочной стеной здания.</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ================================================= -->
+<!-- СЛАЙД 17 -->
+<!-- ================================================= -->
+
+<section class="slide">
+
+<div class="slide-card">
+
+<h2 class="slide-title">17. Растительная и животная клетка 🌱🐾</h2>
+
+<div class="diagram-section">
+
+<div class="diagram">
+
+<div class="plant-cell">
+
+<div class="plant-vacuole"></div>
+
+<div class="plant-nucleus"></div>
+
+<div class="chloroplast ch1"></div>
+<div class="chloroplast ch2"></div>
+<div class="chloroplast ch3"></div>
+<div class="chloroplast ch4"></div>
+
+</div>
+
+</div>
+
+<div class="info-card">
+
+<h3>🌱 Растительная клетка</h3>
+
+<ul>
+<li>Клеточная мембрана</li>
+<li>Клеточная стенка</li>
+<li>Ядро</li>
+<li>Хлоропласты</li>
+<li>Большая вакуоль</li>
+<li>Митохондрии</li>
+<li>Рибосомы</li>
+</ul>
+
+<br>
+
+<h3>🐾 Животная клетка</h3>
+
+<ul>
+<li>Клеточная мембрана</li>
+<li>Ядро</li>
+<li>Митохондрии</li>
+<li>Рибосомы</li>
+<li>ЭПС</li>
+<li>Аппарат Гольджи</li>
+<li>Лизосомы</li>
+</ul>
+
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ================================================= -->
+<!-- СЛАЙД 18 -->
+<!-- ================================================= -->
+
+<section class="slide">
+
+<div class="slide-card">
+
+<h2 class="slide-title">18. Сравним органоиды 🔬</h2>
+
+<div class="organelles">
+
+<div class="organelle" onclick="openModal('Ядро','🧠','Хранит ДНК и управляет работой клетки.','Центр управления клетки.')">
+<div class="org-icon">🧠</div>
+<h3>Ядро</h3>
+<p>Управление</p>
+</div>
+
+<div class="organelle" onclick="openModal('Митохондрия','⚡','Производит энергию для работы клетки.','Энергетическая станция.')">
+<div class="org-icon">⚡</div>
+<h3>Митохондрия</h3>
+<p>Энергия</p>
+</div>
+
+<div class="organelle" onclick="openModal('Рибосома','🏭','Создаёт белки.','Фабрика белка.')">
+<div class="org-icon">🏭</div>
+<h3>Рибосома</h3>
+<p>Белки</p>
+</div>
+
+<div class="organelle" onclick="openModal('Хлоропласт','🌿','Проводит фотосинтез в растительной клетке.','Солнечная лаборатория.')">
+<div class="org-icon">🌿</div>
+<h3>Хлоропласт</h3>
+<p>Фотосинтез</p>
+</div>
+
+<div class="organelle" onclick="openModal('Вакуоль','💧','Хранит воду и растворённые вещества.','Резервуар клетки.')">
+<div class="org-icon">💧</div>
+<h3>Вакуоль</h3>
+<p>Запас</p>
+</div>
+
+<div class="organelle" onclick="openModal('Аппарат Гольджи','📦','Сортирует и упаковывает вещества.','Почтовый центр.')">
+<div class="org-icon">📦</div>
+<h3>Аппарат Гольджи</h3>
+<p>Упаковка</p>
+</div>
+
+<div class="organelle" onclick="openModal('ЭПС','🚚','Перемещает и помогает создавать вещества.','Транспортная система.')">
+<div class="org-icon">🚚</div>
+<h3>ЭПС</h3>
+<p>Транспорт</p>
+</div>
+
+<div class="organelle" onclick="openModal('Лизосома','♻️','Расщепляет ненужные вещества.','Перерабатывающий центр.')">
+<div class="org-icon">♻️</div>
+<h3>Лизосома</h3>
+<p>Переработка</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ================================================= -->
+<!-- СЛАЙД 19 -->
+<!-- ================================================= -->
+
+<section class="slide">
+
+<div class="slide-card">
+
+<h2 class="slide-title">19. Как работает клетка? ⚙️</h2>
+
+<div class="diagram-section">
+
+<div class="diagram">
+
+<div class="big-cell">
+
+<div class="big-nucleus"></div>
+
+<div class="diagram-org d1" onclick="openModal('Ядро','🧠','Здесь хранится ДНК и регулируется работа клетки.')">
+🧠 Ядро
+</div>
+
+<div class="diagram-org d2" onclick="openModal('Митохондрия','⚡','Обеспечивает клетку энергией.')">
+⚡ Энергия
+</div>
+
+<div class="diagram-org d3" onclick="openModal('Рибосомы','🏭','Создают белки.')">
+🏭 Белки
+</div>
+
+<div class="diagram-org d4" onclick="openModal('Гольджи','📦','Сортирует и упаковывает вещества.')">
+📦 Гольджи
+</div>
+
+<div class="diagram-org d5" onclick="openModal('ЭПС','🚚','Перемещает вещества.')">
+🚚 ЭПС
+</div>
+
+<div class="diagram-org d6" onclick="openModal('Мембрана','🛡️','Защищает клетку и контролирует обмен веществ.')">
+🛡️ Мембрана
+</div>
+
+</div>
+
+</div>
+
+<div class="info-card">
+
+<h3>🔄 Работа клетки</h3>
+
+<p>1. Мембрана получает необходимые вещества.</p>
+<br>
+<p>2. Митохондрии обеспечивают клетку энергией.</p>
+<br>
+<p>3. Рибосомы создают белки.</p>
+<br>
+<p>4. ЭПС помогает перемещать вещества.</p>
+<br>
+<p>5. Аппарат Гольджи сортирует и упаковывает вещества.</p>
+<br>
+<p>6. Ядро хранит информацию и регулирует работу.</p>
+
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ================================================= -->
+<!-- СЛАЙД 20 -->
+<!-- ================================================= -->
+
+<section class="slide">
+
+<div class="slide-card">
+
+<h2 class="slide-title">20. Деление клетки 🧬</h2>
+
+<div class="definition">
+<strong>Митоз</strong> — процесс деления клетки,
+при котором из одной клетки образуются две дочерние клетки
+с одинаковым набором хромосом.
+</div>
+
+<div class="content-grid">
+
+<div class="info-card">
+<h3>1️⃣ Подготовка</h3>
+<p>Клетка растёт и копирует свою ДНК.</p>
+</div>
+
+<div class="info-card">
+<h3>2️⃣ Распределение</h3>
+<p>Хромосомы распределяются между будущими клетками.</p>
+</div>
+
+<div class="info-card">
+<h3>3️⃣ Деление</h3>
+<p>Клетка разделяется на две.</p>
+</div>
+
+<div class="info-card">
+<h3>4️⃣ Результат</h3>
+<p>Образуются две дочерние клетки.</p>
+</div>
+
+</div>
+
+<div class="formula">
+1 клетка → митоз → 2 дочерние клетки
+</div>
+
+</div>
+</section>
+
+
+<!-- ================================================= -->
+<!-- СЛАЙД 21 -->
+<!-- ================================================= -->
+
+<section class="slide">
+
+<div class="slide-card">
+
+<h2 class="slide-title">21. Почему клетка так важна? ❤️</h2>
+
+<div class="content-grid">
+
+<div class="info-card">
+<h3>⚡ Получает энергию</h3>
+<p>Клетки получают и используют энергию.</p>
+</div>
+
+<div class="info-card">
+<h3>🌱 Растёт</h3>
+<p>Клетки участвуют в росте организма.</p>
+</div>
+
+<div class="info-card">
+<h3>🔄 Делится</h3>
+<p>Клетки могут образовывать новые клетки.</p>
+</div>
+
+<div class="info-card">
+<h3>🧪 Создаёт вещества</h3>
+<p>Клетки производят белки и другие необходимые соединения.</p>
+</div>
+
+<div class="info-card">
+<h3>📡 Получает сигналы</h3>
+<p>Клетки взаимодействуют между собой.</p>
+</div>
+
+<div class="info-card">
+<h3>🧠 Выполняет функции</h3>
+<p>Разные клетки выполняют разные задачи в организме.</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ================================================= -->
+<!-- СЛАЙД 22 -->
+<!-- ================================================= -->
+
+<section class="slide">
+
+<div class="slide-card">
+
+<h2 class="slide-title">22. Интересные факты 💡</h2>
+
+<div class="content-grid">
+
+<div class="info-card">
+<h3>🔬 Факт 1</h3>
+<p>Некоторые клетки настолько маленькие,
+что их невозможно увидеть без микроскопа.</p>
+</div>
+
+<div class="info-card">
+<h3>🧬 Факт 2</h3>
+<p>В клетках хранится огромное количество наследственной информации.</p>
+</div>
+
+<div class="info-card">
+<h3>🌱 Факт 3</h3>
+<p>Хлоропласты позволяют растениям использовать энергию света.</p>
+</div>
+
+<div class="info-card">
+<h3>⚡ Факт 4</h3>
+<p>В клетках постоянно происходят химические реакции.</p>
+</div>
+
+<div class="info-card">
+<h3>🩸 Факт 5</h3>
+<p>Разные клетки организма могут иметь совершенно разную форму.</p>
+</div>
+
+<div class="info-card">
+<h3>🔄 Факт 6</h3>
+<p>Клетки постоянно взаимодействуют друг с другом.</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ================================================= -->
+<!-- СЛАЙД 23 -->
+<!-- ================================================= -->
+
+<section class="slide">
+
+<div class="slide-card">
+
+<h2 class="slide-title">23. Проверь себя 🧠</h2>
+
+<div class="question">
+<strong>1. Что такое клетка?</strong>
+<button class="show-answer" onclick="showAnswer(this)">Показать ответ</button>
+<div class="answer">Основная структурная и функциональная единица живого организма.</div>
+</div>
+
+<div class="question">
+<strong>2. Где находится ДНК?</strong>
+<button class="show-answer" onclick="showAnswer(this)">Показать ответ</button>
+<div class="answer">Большая часть ДНК клетки находится в ядре.</div>
+</div>
+
+<div class="question">
+<strong>3. Какой органоид производит энергию?</strong>
+<button class="show-answer" onclick="showAnswer(this)">Показать ответ</button>
+<div class="answer">Митохондрии участвуют в получении энергии.</div>
+</div>
+
+<div class="question">
+<strong>4. Где создаются белки?</strong>
+<button class="show-answer" onclick="showAnswer(this)">Показать ответ</button>
+<div class="answer">На рибосомах.</div>
+</div>
+
+<div class="question">
+<strong>5. Где происходит фотосинтез?</strong>
+<button class="show-answer" onclick="showAnswer(this)">Показать ответ</button>
+<div class="answer">В хлоропластах растительных клеток.</div>
+</div>
+
+<div class="question">
+<strong>6. Какой органоид сортирует вещества?</strong>
+<button class="show-answer" onclick="showAnswer(this)">Показать ответ</button>
+<div class="answer">Аппарат Гольджи.</div>
+</div>
+
+</div>
+</section>
+
+
+<!-- ================================================= -->
+<!-- СЛАЙД 24 -->
+<!-- ================================================= -->
+
+<section class="slide">
+
+<div class="slide-card">
+
+<h2 class="slide-title">24. Главное, что нужно запомнить ⭐</h2>
+
+<div class="definition">
+Клетка — маленькая, но очень сложная система,
+в которой каждая часть выполняет свою работу.
+</div>
+
+<div class="organelles">
+
+<div class="organelle">
+<div class="org-icon">🧠</div>
+<h3>Ядро</h3>
+<p>Хранит ДНК и управляет</p>
+</div>
+
+<div class="organelle">
+<div class="org-icon">⚡</div>
+<h3>Митохондрии</h3>
+<p>Энергия</p>
+</div>
+
+<div class="organelle">
+<div class="org-icon">🏭</div>
+<h3>Рибосомы</h3>
+<p>Белки</p>
+</div>
+
+<div class="organelle">
+<div class="org-icon">🌿</div>
+<h3>Хлоропласты</h3>
+<p>Фотосинтез</p>
+</div>
+
+<div class="organelle">
+<div class="org-icon">💧</div>
+<h3>Вакуоль</h3>
+<p>Запас воды и веществ</p>
+</div>
+
+<div class="organelle">
+<div class="org-icon">📦</div>
+<h3>Аппарат Гольджи</h3>
+<p>Сортировка и упаковка</p>
+</div>
+
+<div class="organelle">
+<div class="org-icon">🚚</div>
+<h3>ЭПС</h3>
+<p>Транспорт и синтез</p>
+</div>
+
+<div class="organelle">
+<div class="org-icon">🛡️</div>
+<h3>Мембрана</h3>
+<p>Защита и обмен</p>
+</div>
+
+</div>
+
+<div class="formula">
+❤️ Клетка — маленькая, но очень сложная система!
+</div>
+
+<div style="text-align:center;margin-top:30px;font-size:20px;color:#9deeff;">
+🎉 Ева, ты изучила строение клетки!
+</div>
+
+</div>
+</section>
+
+
+<footer>
+
+<div class="footer-title">
+🧬 Клетка и её органоиды
+</div>
+
+<p>
+Препод Джураев Муслим Тариэльевич
+</p>
+
+<p>
+Ученица: Ева • 6 класс
+</p>
+
+</footer>
+
+</main>
+
+
+<!-- ================================================= -->
+<!-- MODAL -->
+<!-- ================================================= -->
+
+<div class="modal" id="modal">
+
+<div class="modal-box">
+
+<button class="close" onclick="closeModal()">×</button>
+
+<div class="modal-icon" id="modalIcon">🧬</div>
+
+<h2 id="modalTitle">Органоид</h2>
+
+<p id="modalText"></p>
+
+<div class="modal-tip" id="modalTip"></div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   СЛАЙДЫ
+========================= */
+
+let currentSlide = 0;
+
+const slides = document.querySelectorAll(".slide");
+
+function showSlide(index){
+
+    if(index < 0){
+        index = slides.length - 1;
+    }
+
+    if(index >= slides.length){
+        index = 0;
+    }
+
+    slides.forEach(slide=>{
+        slide.classList.remove("active");
+    });
+
+    slides[index].classList.add("active");
+
+    currentSlide = index;
+
+    document.getElementById("counter").textContent =
+        (index + 1) + " / " + slides.length;
+
+    const progress =
+        ((index + 1) / slides.length) * 100;
+
+    document.getElementById("progressBar").style.width =
+        progress + "%";
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+function nextSlide(){
+    showSlide(currentSlide + 1);
+}
+
+function previousSlide(){
+    showSlide(currentSlide - 1);
+}
+
+
+/* =========================
+   КЛАВИАТУРА
+========================= */
+
+document.addEventListener("keydown",function(event){
+
+    if(event.key === "ArrowRight"){
+        nextSlide();
+    }
+
+    if(event.key === "ArrowLeft"){
+        previousSlide();
+    }
+
+    if(event.key === "Escape"){
+        closeModal();
+    }
+
+});
+
+
+/* =========================
+   POPUP
+========================= */
+
+function openModal(title,icon,text,tip=""){
+
+    document.getElementById("modalTitle").textContent = title;
+
+    document.getElementById("modalIcon").textContent = icon;
+
+    document.getElementById("modalText").textContent = text;
+
+    document.getElementById("modalTip").textContent =
+        tip || "Теперь ты знаешь больше об этом органоиде!";
+
+    document.getElementById("modal").classList.add("show");
+}
+
+function closeModal(){
+
+    document.getElementById("modal").classList.remove("show");
+
+}
+
+document.getElementById("modal").addEventListener("click",function(event){
+
+    if(event.target === this){
+        closeModal();
+    }
+
+});
+
+
+/* =========================
+   ОТВЕТЫ
+========================= */
+
+function showAnswer(button){
+
+    const answer =
+        button.nextElementSibling;
+
+    if(answer.style.display === "block"){
+
+        answer.style.display = "none";
+
+        button.textContent =
+            "Показать ответ";
+
+    }else{
+
+        answer.style.display = "block";
+
+        button.textContent =
+            "Скрыть ответ";
+
+    }
+
+}
+
+
+/* =========================
+   SWIPE ДЛЯ ТЕЛЕФОНА
+========================= */
+
+let touchStartX = 0;
+
+document.addEventListener("touchstart",function(event){
+
+    touchStartX = event.changedTouches[0].screenX;
+
+});
+
+document.addEventListener("touchend",function(event){
+
+    let touchEndX =
+        event.changedTouches[0].screenX;
+
+    let difference =
+        touchStartX - touchEndX;
+
+    if(Math.abs(difference) > 60){
+
+        if(difference > 0){
+            nextSlide();
+        }else{
+            previousSlide();
+        }
+
+    }
+
+});
+
+
+/* =========================
+   АВТОМАТИЧЕСКИЕ ПЛАВАЮЩИЕ
+   ЧАСТИЦЫ
+========================= */
+
+const background =
+    document.querySelector(".background");
+
+for(let i=0;i<15;i++){
+
+    const particle =
+        document.createElement("span");
+
+    particle.className = "particle";
+
+    particle.style.left =
+        Math.random()*100 + "%";
+
+    particle.style.top =
+        Math.random()*100 + "%";
+
+    particle.style.animationDelay =
+        Math.random()*7 + "s";
+
+    particle.style.animationDuration =
+        5 + Math.random()*7 + "s";
+
+    background.appendChild(particle);
+}
+
+
+/* =========================
+   СТАРТ
+========================= */
+
+showSlide(0);
+
+</script>
+
+</body>
+</html>
